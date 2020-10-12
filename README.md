@@ -7,3 +7,16 @@ The goal of this project is to determine your Model-View-Controller design patte
 ## Deliverables
 
 Using an MVC framework, build a simple registration model for students to register for courses at a college. Students should be able to use an online form to register themselves, and see a list of available courses to them. The deliverables should include a SQL database and associated tables (at the very least a table for students and a table for classes), and all the MVC code to successfully deploy the project.
+
+When you have completed the project, please send a pull request.
+
+## Repository format
+
+Pick your own repository format (directories/folders, SQL tables)
+
+## Rubric
+
+We will score your project on the following criteria:
+
+1. Organization
+2. Readability
