@@ -1,0 +1,116 @@
+﻿@model ClassRegistrationSystem.Models.Student
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Student</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Major, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Major, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Major, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="ui vertical stripe segment">
+                <div class="ui container">
+                    <h3>Available Classes</h3>
+                    <div class="form-group">
+                        <table class="ui compact celled definition table">
+                            <thead>
+                                <tr>
+                                    <th>Enrolled</th>
+                                    <th>Title</th>
+                                    <th>Credits</th>
+                                    <th>Department</th>
+                                    <th>Professor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    List<ClassRegistrationSystem.Models.Course> courses = ViewBag.Courses;
+                                    HashSet<int> enrollments = ViewBag.Enrollments;
+                                    foreach (var course in courses)
+                                    {
+                                        @:<tr>
+                                            @:<td class="collapsing">
+                                                @:<div class="ui fitted slider checkbox">
+                                                    <input type="checkbox"
+                                                                name="selectedCourses"
+                                                                value="@course.CourseID"
+                                                        @(Html.Raw(enrollments.Contains(course.CourseID) ? "checked=\"checked\"" : ""))> <label></label>
+                                                @:</div>
+                                            @:</td>
+                                            @:<td>@course.Title</td>
+                                            @:<td>
+                                                @course.Credits
+                                            @:</td>
+                                            @:<td>
+                                                @course.Department
+                                            @:</td>
+                                            @:<td>
+                                                @course.Professor
+                                            @:</td>
+                                        @:</tr>
+                                    }
+                                }
+                            </tbody>
+                            <tfoot class="full-width">
+                                <tr>
+                                    <th></th>
+                                    <th colspan="5">
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Register" class="ui right floated small primary button" />
+                                            </div>
+                                        </div>
+                                        @*<div class="ui right floated small primary button" onclick="checkAll()">
+                                            Register
+                                        </div>*@
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
