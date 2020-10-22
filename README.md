@@ -1,22 +1,22 @@
-# parity-mvc-intro
+# Course Registration System
 
-## Goal
+This Course Registration System is an ASP.NET MVC application that uses Entity Framework 6 and SQL Server LocalDB. for data access.
 
-The goal of this project is to determine your Model-View-Controller design patterns. The project should not take more than four to eight hours to complete.
+## Use Cases
 
-## Deliverables
+The home page shows an admin view of a list of students with their name, gender, and major. 
 
-Using an MVC framework, build a simple registration model for students to register for courses at a college. Students should be able to use an online form to register themselves, and see a list of available courses to them. The deliverables should include a SQL database and associated tables (at the very least a table for students and a table for classes), and all the MVC code to successfully deploy the project.
+By clicking the Edit button, the page directs the user to the edit view. In the edit view, the user can edit the student's information and register class by selecting the checkboxes on the left of the Available Classes table. If a checkbox is initially selected, it means that the student is currently enrolled in that class. When the user is done making changes, the user would click the Register button and all the changes will be made. 
 
-When you have completed the project, please send a pull request.
+By clicking the Details button, the page directs the user to the details view. The details view displays the name, gender, major, enrolled classes and classes the student has already taken. 
 
-## Repository format
+## Database Design - Data Model
 
-Pick your own repository format (directories/folders, SQL tables)
+Student: ID (primary key), Name, Gender, Major, Enrollments, ClassesTaken
+Course: CourseID (primary key), Title, Credits, Department, Professor
+ClassTaken: ClassTakenID (primary key), CourseID, StudentID, Course, Student
 
-## Rubric
+The CourseID in Course references CourseID in ClassTaken.
+The ID in Student references StudentID in ClassTaken.
 
-We will score your project on the following criteria:
-
-1. Organization
-2. Readability
+There's a one-to-many relationship between Student and Course entities, and there's a one-to-many relationship between Student and Enrollment Course.
